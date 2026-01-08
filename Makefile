@@ -17,5 +17,5 @@ logs:
 # --- Test rate limit ---
 test:
 	@echo "Sending 20 requests in quick succession to test 429..."
-	@seq 1 20 | xargs -n1 -P20 -I{} curl -s -o /dev/null -w "%{http_code}\n" $(NGINX_URL) | sort | uniq -c
+	@seq 1 20 | xargs -P20 -I{} curl -s -o /dev/null -w "%{http_code}\n" $(NGINX_URL) | sort | uniq -c
 	@echo "Expected: some 429s if limit works."
