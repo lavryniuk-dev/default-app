@@ -27,7 +27,7 @@ git clone https://github.com/lavryniuk-dev/default-app
 ```
 make up
 ```
-3. Perform http requests to localhost:8080/healthz endpoint via Postman, Katalon Studio, etc (expected output: status - 200, service - app, env - currently defined var APP_ENV in .env file)
+3. Perform http requests to localhost:8080/healthz endpoint via Postman, Katalon Studio, etc (expected output: status - ok, service - app, env - currently defined var APP_ENV in .env file)
 4. Do flood test to perform many requests for check 429 status (expected ouput how many times we get 200 and 429 statuses for 20 sended requests)
 ```
 make test
