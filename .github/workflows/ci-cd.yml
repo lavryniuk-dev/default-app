@@ -18,6 +18,19 @@ jobs:
         run: |
           docker compose up -d
 
+      - name: Test 429 rate limit
+        run: |
+          echo "Sending 20 sequential requests to Nginx to test 429..."
+          for i in $(seq 1 20); do
+            code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/healthz)
+            echo "Request #$i: $code"
+            if [ "$i" -eq 11 ] && [ "$code" -ne 429 ]; then
+              echo "ERROR: 11th request should be 429 but got $code"
+              exit 1
+            fi
+          done
+          echo "Rate limit test passed (11th request returned 429)"
+          
       - name: Show logs on failure
         if: failure()
         run: docker compose logs
