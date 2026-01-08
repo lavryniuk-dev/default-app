@@ -10,6 +10,7 @@ This project implements simple API who have just one healthcheck endpoint
 ### Technologies
 *The following stack of technologies used in the project*
 * Java 17
+* Spring Boot
 * Tomcat
 * Nginx
 * Docker
