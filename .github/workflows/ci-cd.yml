@@ -22,10 +22,9 @@ jobs:
         run: |
           echo "Sending 15 sequential requests to Nginx to test 429..."
           
-          found_429=0
           codes=$(seq 1 15 | xargs -P20 -I{} curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/healthz)
 
-          if [ $found_429 -eq 1 ]; then
+          if echo "$codes" | grep -q 429; then
             echo "OK: At least one request returned 429"
             exit 0
           else
